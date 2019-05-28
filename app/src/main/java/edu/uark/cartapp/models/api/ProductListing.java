@@ -44,6 +44,6 @@ public class ProductListing implements LoadFromJsonInterface<ProductListing> {
 	}
 
 	public ProductListing() {
-		this.products = new LinkedList<Product>();
+		this.products = new LinkedList<>();
 	}
 }

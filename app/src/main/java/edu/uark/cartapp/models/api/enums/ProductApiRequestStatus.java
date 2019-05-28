@@ -45,7 +45,7 @@ public enum ProductApiRequestStatus {
 	private static Map<String, ProductApiRequestStatus> nameMap = null;
 	private static SparseArray<ProductApiRequestStatus> valueMap = null;
 
-	private ProductApiRequestStatus(int value) {
+	ProductApiRequestStatus(int value) {
 		this.value = value;
 	}
 }

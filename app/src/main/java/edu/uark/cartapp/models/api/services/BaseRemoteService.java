@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 import edu.uark.cartapp.models.api.interfaces.PathElementInterface;
@@ -84,13 +85,13 @@ public abstract class BaseRemoteService {
 			httpURLConnection = (HttpURLConnection) connectionUrl.openConnection();
 			httpURLConnection.setDoInput(true);
 			httpURLConnection.setDoOutput(true);
-			httpURLConnection.setFixedLengthStreamingMode(jsonObject.toString().getBytes(UTF8_CHARACTER_ENCODING).length);
+			httpURLConnection.setFixedLengthStreamingMode(jsonObject.toString().getBytes(StandardCharsets.UTF_8).length);
 			httpURLConnection.setRequestMethod(PUT_REQUEST_METHOD);
 			httpURLConnection.addRequestProperty(ACCEPT_REQUEST_PROPERTY, JSON_PAYLOAD_TYPE);
 			httpURLConnection.addRequestProperty(CONTENT_TYPE_REQUEST_PROPERTY, JSON_PAYLOAD_TYPE);
 
 			OutputStream outputStream = httpURLConnection.getOutputStream();
-			outputStream.write(jsonObject.toString().getBytes(UTF8_CHARACTER_ENCODING));
+			outputStream.write(jsonObject.toString().getBytes(StandardCharsets.UTF_8));
 			outputStream.flush();
 
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));

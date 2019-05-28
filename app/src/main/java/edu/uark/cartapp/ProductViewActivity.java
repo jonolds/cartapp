@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -26,7 +25,7 @@ public class ProductViewActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_product_view);
-		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+		setSupportActionBar(findViewById(R.id.toolbar));
 
 		ActionBar actionBar = this.getSupportActionBar();
 		if (actionBar != null) {
@@ -38,11 +37,11 @@ public class ProductViewActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home:  // Respond to the action bar's Up/Home button
-				this.finish();
+		// Respond to the action bar's Up/Home button
+		if (item.getItemId() == android.R.id.home) {
+			this.finish();
 
-				return true;
+			return true;
 		}
 
 		return super.onOptionsItemSelected(item);

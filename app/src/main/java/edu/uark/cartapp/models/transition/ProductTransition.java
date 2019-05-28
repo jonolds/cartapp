@@ -12,6 +12,7 @@ import edu.uark.cartapp.commands.converters.ByteToUUIDConverterCommand;
 import edu.uark.cartapp.commands.converters.UUIDToByteConverterCommand;
 import edu.uark.cartapp.models.api.Product;
 
+@SuppressWarnings("UnusedReturnValue")
 public class ProductTransition implements Parcelable {
 	private UUID id;
 	public UUID getId() {
