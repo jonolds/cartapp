@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import edu.uark.cartapp.adapters.ProductListAdapter;
 import edu.uark.cartapp.models.api.Product;
@@ -59,7 +60,7 @@ public class ProductsListingActivity extends AppCompatActivity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			products.clear();
-			products.addAll((new ProductService()).getProducts());
+			products.addAll(Objects.requireNonNull((new ProductService()).getProducts()));
 			return null;
 		}
 
