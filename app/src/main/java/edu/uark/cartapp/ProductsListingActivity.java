@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,12 +16,16 @@ import edu.uark.cartapp.models.api.Product;
 import edu.uark.cartapp.models.api.services.ProductService;
 import edu.uark.cartapp.models.transition.ProductTransition;
 
+/* ==== APP ProductsListingActivity.java ====*/
 public class ProductsListingActivity extends AppCompatActivity {
+	private List<Product> products;
+	private AlertDialog loadingProductsAlert;
+	private ProductListAdapter productListAdapter;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_products_listing);
-		setSupportActionBar(findViewById(R.id.toolbar));
 
 		ActionBar actionBar = this.getSupportActionBar();
 		if (actionBar != null) {
@@ -32,31 +34,19 @@ public class ProductsListingActivity extends AppCompatActivity {
 
 		this.products = new ArrayList<>();
 		this.productListAdapter = new ProductListAdapter(this, this.products);
-
 		this.getProductsListView().setAdapter(this.productListAdapter);
-		this.getProductsListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getApplicationContext(), ProductViewActivity.class);
-
-				intent.putExtra(
-					getString(R.string.intent_extra_product),
-					new ProductTransition((Product) getProductsListView().getItemAtPosition(position))
-				);
-
-				startActivity(intent);
-			}
+		this.getProductsListView().setOnItemClickListener((parent, view, position, id) -> {
+			Intent intent = new Intent(getApplicationContext(), CreateProductActivity.class);
+			intent.putExtra(getString(R.string.intent_extra_product), new ProductTransition((Product) getProductsListView().getItemAtPosition(position)));
+			startActivity(intent);
 		});
 
-		this.loadingProductsAlert = new AlertDialog.Builder(this).
-			setMessage(R.string.alert_dialog_products_loading).
-			create();
+		this.loadingProductsAlert = new AlertDialog.Builder(this).setMessage(R.string.alert_dialog_products_loading).create();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-
 		this.loadingProductsAlert.show();
 		(new RetrieveProductsTask()).execute();
 	}
@@ -69,10 +59,7 @@ public class ProductsListingActivity extends AppCompatActivity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			products.clear();
-			products.addAll(
-				(new ProductService()).getProducts()
-			);
-
+			products.addAll((new ProductService()).getProducts());
 			return null;
 		}
 
@@ -82,8 +69,4 @@ public class ProductsListingActivity extends AppCompatActivity {
 			loadingProductsAlert.dismiss();
 		}
 	}
-
-	private List<Product> products;
-	private AlertDialog loadingProductsAlert;
-	private ProductListAdapter productListAdapter;
 }

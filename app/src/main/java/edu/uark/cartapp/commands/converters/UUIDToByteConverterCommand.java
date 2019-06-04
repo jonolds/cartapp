@@ -5,22 +5,23 @@ import java.util.UUID;
 
 import edu.uark.cartapp.commands.interfaces.ResultInterface;
 
+/* ==== APP UUIDToByteConverterCommand.java ====*/
 public class UUIDToByteConverterCommand implements ResultInterface<byte[]> {
+	private UUID valueToConvert;
+
+	public UUIDToByteConverterCommand setValueToConvert(UUID valueToConvert) {
+		this.valueToConvert = valueToConvert;
+		return this;
+	}
+	public UUID getValueToConvert() {
+		return this.valueToConvert;
+	}
+
 	@Override
 	public byte[] execute() {
 		ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[16]);
 		byteBuffer.putLong(this.valueToConvert.getMostSignificantBits());
 		byteBuffer.putLong(this.valueToConvert.getLeastSignificantBits());
-
 		return byteBuffer.array();
-	}
-
-	private UUID valueToConvert;
-	public UUID getValueToConvert() {
-		return this.valueToConvert;
-	}
-	public UUIDToByteConverterCommand setValueToConvert(UUID valueToConvert) {
-		this.valueToConvert = valueToConvert;
-		return this;
 	}
 }

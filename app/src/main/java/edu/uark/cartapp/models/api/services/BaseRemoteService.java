@@ -16,26 +16,33 @@ import java.util.UUID;
 
 import edu.uark.cartapp.models.api.interfaces.PathElementInterface;
 
+/* ==== APP BaseRemoteService.java ====*/
 public abstract class BaseRemoteService {
+
+	private static final String URL_JOIN = "/";
+	private static final String GET_REQUEST_METHOD = "GET";
+	private static final String PUT_REQUEST_METHOD = "PUT";
+	private static final String UTF8_CHARACTER_ENCODING = "UTF8";
+	private static final String ACCEPT_REQUEST_PROPERTY = "Accept";
+	private static final String JSON_PAYLOAD_TYPE = "application/json";
+	private static final String CONTENT_TYPE_REQUEST_PROPERTY = "Content-Type";
+	private static final String BASE_URL = "https://cartservice.herokuapp.com/";
+
 	protected JSONObject requestSingle(PathElementInterface[] pathElements) {
 		return this.requestSingle(pathElements, StringUtils.EMPTY);
 	}
-
 	protected JSONObject requestSingle(PathElementInterface[] pathElements, UUID id) {
 		return this.requestSingle(pathElements, id.toString());
 	}
-
 	protected JSONObject requestSingle(PathElementInterface[] pathElements, String value) {
 		URL connectionUrl = this.buildPath(pathElements, value);
 		String rawResponse = this.performGetRequest(connectionUrl);
-
 		return this.rawResponseToJSONObject(rawResponse);
 	}
 
 	protected JSONObject putSingle(PathElementInterface[] pathElements, JSONObject jsonObject) {
 		URL connectionUrl = this.buildPath(pathElements);
 		String rawResponse = this.performPutRequest(connectionUrl, jsonObject);
-
 		return this.rawResponseToJSONObject(rawResponse);
 	}
 
@@ -69,7 +76,6 @@ public abstract class BaseRemoteService {
 				httpURLConnection.disconnect();
 			}
 		}
-
 		return rawResponse.toString();
 	}
 
@@ -109,7 +115,6 @@ public abstract class BaseRemoteService {
 				httpURLConnection.disconnect();
 			}
 		}
-
 		return rawResponse.toString();
 	}
 
@@ -123,14 +128,12 @@ public abstract class BaseRemoteService {
 				e.printStackTrace();
 			}
 		}
-
 		return jsonObject;
 	}
 
 	private URL buildPath(PathElementInterface[] pathElements) {
 		return this.buildPath(pathElements, StringUtils.EMPTY);
 	}
-
 	private URL buildPath(PathElementInterface[] pathElements, String specificationEntry) {
 		StringBuilder completePath = new StringBuilder(BASE_URL);
 
@@ -153,16 +156,6 @@ public abstract class BaseRemoteService {
 			e.printStackTrace();
 			connectionUrl = null;
 		}
-
 		return connectionUrl;
 	}
-
-	private static final String URL_JOIN = "/";
-	private static final String GET_REQUEST_METHOD = "GET";
-	private static final String PUT_REQUEST_METHOD = "PUT";
-	private static final String UTF8_CHARACTER_ENCODING = "UTF8";
-	private static final String ACCEPT_REQUEST_PROPERTY = "Accept";
-	private static final String JSON_PAYLOAD_TYPE = "application/json";
-	private static final String CONTENT_TYPE_REQUEST_PROPERTY = "Content-Type";
-	private static final String BASE_URL = "https://cartservice.herokuapp.com/";
 }

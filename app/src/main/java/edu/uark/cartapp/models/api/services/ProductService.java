@@ -13,11 +13,10 @@ import edu.uark.cartapp.models.api.enums.ProductApiMethod;
 import edu.uark.cartapp.models.api.enums.ProductApiRequestStatus;
 import edu.uark.cartapp.models.api.interfaces.PathElementInterface;
 
+/* ==== APP ProductService.java ====*/
 public class ProductService extends BaseRemoteService {
 	public Product getProduct(UUID productId) {
-		JSONObject rawJsonObject = this.requestSingle(
-			(new PathElementInterface[] { ProductApiMethod.PRODUCT, ApiLevel.ONE }), productId
-		);
+		JSONObject rawJsonObject = this.requestSingle((new PathElementInterface[]{ProductApiMethod.PRODUCT, ApiLevel.ONE}), productId);
 
 		if (rawJsonObject != null) {
 			return (new Product()).loadFromJson(rawJsonObject);
@@ -27,9 +26,7 @@ public class ProductService extends BaseRemoteService {
 	}
 
 	public Product getProductByLookupCode(String productLookupCode) {
-		JSONObject rawJsonObject = this.requestSingle(
-			(new PathElementInterface[] { ProductApiMethod.PRODUCT, ApiLevel.ONE, ProductApiMethod.BY_LOOKUP_CODE }), productLookupCode
-		);
+		JSONObject rawJsonObject = this.requestSingle((new PathElementInterface[]{ProductApiMethod.PRODUCT, ApiLevel.ONE, ProductApiMethod.BY_LOOKUP_CODE}), productLookupCode);
 
 		if (rawJsonObject != null) {
 			return (new Product()).loadFromJson(rawJsonObject);
@@ -40,23 +37,18 @@ public class ProductService extends BaseRemoteService {
 
 	public List<Product> getProducts() {
 		List<Product> activities;
-		JSONObject rawJsonObject = this.requestSingle(
-			(new PathElementInterface[] { ProductApiMethod.PRODUCT, ApiLevel.ONE, ProductApiMethod.PRODUCTS })
-		);
+		JSONObject rawJsonObject = this.requestSingle((new PathElementInterface[]{ProductApiMethod.PRODUCT, ApiLevel.ONE, ProductApiMethod.PRODUCTS}));
 
 		if (rawJsonObject != null) {
 			activities = (new ProductListing()).loadFromJson(rawJsonObject).getProducts();
 		} else {
 			activities = new ArrayList<>(0);
 		}
-
 		return activities;
 	}
 
 	public Product putProduct(Product product) {
-		JSONObject rawJsonObject = this.putSingle(
-			(new PathElementInterface[]{ ProductApiMethod.PRODUCT, ApiLevel.ONE }), product.convertToJson()
-		);
+		JSONObject rawJsonObject = this.putSingle((new PathElementInterface[]{ProductApiMethod.PRODUCT, ApiLevel.ONE}), product.convertToJson());
 
 		if (rawJsonObject != null) {
 			return (new Product()).loadFromJson(rawJsonObject);
@@ -64,5 +56,4 @@ public class ProductService extends BaseRemoteService {
 			return new Product().setApiRequestStatus(ProductApiRequestStatus.UNKNOWN_ERROR);
 		}
 	}
-
 }

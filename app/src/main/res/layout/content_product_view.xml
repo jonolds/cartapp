@@ -11,8 +11,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="edu.uark.cartapp.ProductViewActivity"
-    tools:showIn="@layout/activity_product_view">
+    tools:context="edu.uark.cartapp.CreateProductActivity"
+    tools:showIn="@layout/activity_create_product">
 
     <TextView
         android:id="@+id/text_view_product_lookup_code"
@@ -27,7 +27,8 @@
         android:layout_below="@+id/text_view_product_lookup_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/text_view_product_count"
@@ -44,7 +45,8 @@
         android:layout_below="@+id/text_view_product_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/text_view_product_created_on"
@@ -62,7 +64,8 @@
         android:layout_below="@+id/text_view_product_created_on"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:autofillHints="" />
 
     <ImageButton
         android:id="@+id/button_activity_edit_save"
@@ -71,7 +74,6 @@
         android:onClick="saveButtonOnClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         style="?android:attr/buttonBarButtonStyle"/>

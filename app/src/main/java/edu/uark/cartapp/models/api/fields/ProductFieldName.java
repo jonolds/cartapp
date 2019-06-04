@@ -2,6 +2,7 @@ package edu.uark.cartapp.models.api.fields;
 
 import edu.uark.cartapp.models.api.interfaces.FieldNameInterface;
 
+/* ==== APP ProductFieldName.java ====*/
 public enum ProductFieldName implements FieldNameInterface {
 	ID("id"),
 	LOOKUP_CODE("lookupCode"),
@@ -11,11 +12,10 @@ public enum ProductFieldName implements FieldNameInterface {
 	CREATED_ON("createdOn");
 
 	private String fieldName;
-	public String getFieldName() {
-		return this.fieldName;
-	}
 
 	ProductFieldName(String fieldName) {
 		this.fieldName = fieldName;
 	}
+
+	public String getFieldName() { return this.fieldName; }
 }

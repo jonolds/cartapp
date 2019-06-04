@@ -7,6 +7,7 @@ import android.view.View;
 
 import edu.uark.cartapp.models.transition.ProductTransition;
 
+/* ==== APP LandingActivity.java ====*/
 public class LandingActivity extends AppCompatActivity {
 
 	@Override
@@ -20,13 +21,8 @@ public class LandingActivity extends AppCompatActivity {
 	}
 
 	public void createProductButtonOnClick(View view) {
-		Intent intent = new Intent(getApplicationContext(), ProductViewActivity.class);
-
-		intent.putExtra(
-			getString(R.string.intent_extra_product),
-			new ProductTransition()
-		);
-
+		Intent intent = new Intent(getApplicationContext(), CreateProductActivity.class);
+		intent.putExtra(getString(R.string.intent_extra_product), new ProductTransition());
 		this.startActivity(intent);
 	}
 }

@@ -5,6 +5,8 @@ import android.util.SparseArray;
 import java.util.HashMap;
 import java.util.Map;
 
+/* ==== APP ProductApiRequestStatus.java ====*/
+@SuppressWarnings("UnusedReturnValue")
 public enum ProductApiRequestStatus {
 	OK(0),
 	INVALID_INPUT(1),
@@ -12,9 +14,15 @@ public enum ProductApiRequestStatus {
 	NOT_FOUND(3),
 	LOOKUP_CODE_ALREADY_EXISTS(4);
 
-	public int getValue() {
-		return value;
+	private int value;
+	private static Map<String, ProductApiRequestStatus> nameMap = null;
+	private static SparseArray<ProductApiRequestStatus> valueMap = null;
+
+	ProductApiRequestStatus(int value) {
+		this.value = value;
 	}
+
+	public int getValue() { return value; }
 
 	public static ProductApiRequestStatus mapValue(int key) {
 		if (valueMap == null) {
@@ -24,7 +32,6 @@ public enum ProductApiRequestStatus {
 				valueMap.put(status.getValue(), status);
 			}
 		}
-
 		return ((valueMap.indexOfKey(key) >= 0) ? valueMap.get(key) : ProductApiRequestStatus.UNKNOWN_ERROR);
 	}
 
@@ -36,16 +43,6 @@ public enum ProductApiRequestStatus {
 				nameMap.put(status.name(), status);
 			}
 		}
-
 		return (nameMap.containsKey(name) ? nameMap.get(name) : ProductApiRequestStatus.UNKNOWN_ERROR);
-	}
-
-	private int value;
-
-	private static Map<String, ProductApiRequestStatus> nameMap = null;
-	private static SparseArray<ProductApiRequestStatus> valueMap = null;
-
-	ProductApiRequestStatus(int value) {
-		this.value = value;
 	}
 }

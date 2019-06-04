@@ -10,8 +10,14 @@ import java.util.List;
 import edu.uark.cartapp.models.api.fields.ProductListingFieldName;
 import edu.uark.cartapp.models.api.interfaces.LoadFromJsonInterface;
 
+/* ==== APP ProductListing.java ====*/
 public class ProductListing implements LoadFromJsonInterface<ProductListing> {
 	private List<Product> products;
+
+	public ProductListing() {
+		this.products = new LinkedList<>();
+	}
+
 	public List<Product> getProducts() {
 		return this.products;
 	}
@@ -19,6 +25,7 @@ public class ProductListing implements LoadFromJsonInterface<ProductListing> {
 		this.products = products;
 		return this;
 	}
+
 	public ProductListing addProduct(Product product) {
 		this.products.add(product);
 		return this;
@@ -32,18 +39,12 @@ public class ProductListing implements LoadFromJsonInterface<ProductListing> {
 			try {
 				for (int i = 0; i < jsonActivities.length(); i++) {
 					JSONObject jsonActivity = jsonActivities.getJSONObject(i);
-
 					this.products.add((new Product()).loadFromJson(jsonActivity));
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
-
 		return this;
-	}
-
-	public ProductListing() {
-		this.products = new LinkedList<>();
 	}
 }

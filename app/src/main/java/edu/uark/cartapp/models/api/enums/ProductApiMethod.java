@@ -5,16 +5,17 @@ import java.util.Map;
 
 import edu.uark.cartapp.models.api.interfaces.PathElementInterface;
 
+/* ==== APP ProductApiMethod.java ====*/
 public enum ProductApiMethod implements PathElementInterface {
 	NONE(""),
 	PRODUCT("product"),
 	BY_LOOKUP_CODE("byLookupCode"),
 	PRODUCTS("products");
 
-	@Override
-	public String getPathValue() {
-		return value;
-	}
+	private String value;
+	private static Map<String, ProductApiMethod> valueMap = null;
+
+	ProductApiMethod(String value) { this.value = value; }
 
 	public static ProductApiMethod map(String key) {
 		if (valueMap == null) {
@@ -24,15 +25,9 @@ public enum ProductApiMethod implements PathElementInterface {
 				valueMap.put(value.getPathValue(), value);
 			}
 		}
-
 		return (valueMap.containsKey(key) ? valueMap.get(key) : ProductApiMethod.NONE);
 	}
 
-	private String value;
-
-	private static Map<String, ProductApiMethod> valueMap = null;
-
-	ProductApiMethod(String value) {
-		this.value = value;
-	}
+	@Override
+	public String getPathValue() { return value; }
 }
