@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import edu.uark.cartapp.adapters.ProductListAdapter;
 import edu.uark.cartapp.models.api.Product;
@@ -36,10 +37,13 @@ public class ProductsListingActivity extends AppCompatActivity {
 		this.products = new ArrayList<>();
 		this.productListAdapter = new ProductListAdapter(this, this.products);
 		this.getProductsListView().setAdapter(this.productListAdapter);
-		this.getProductsListView().setOnItemClickListener((parent, view, position, id) -> {
-			Intent intent = new Intent(getApplicationContext(), CreateProductActivity.class);
-			intent.putExtra(getString(R.string.intent_extra_product), new ProductTransition((Product) getProductsListView().getItemAtPosition(position)));
-			startActivity(intent);
+		this.getProductsListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(getApplicationContext(), CreateProductActivity.class);
+				intent.putExtra(getString(R.string.intent_extra_product), new ProductTransition((Product) getProductsListView().getItemAtPosition(position)));
+				startActivity(intent);
+			}
 		});
 
 		this.loadingProductsAlert = new AlertDialog.Builder(this).setMessage(R.string.alert_dialog_products_loading).create();
@@ -60,7 +64,7 @@ public class ProductsListingActivity extends AppCompatActivity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			products.clear();
-			products.addAll(Objects.requireNonNull((new ProductService()).getProducts()));
+			products.addAll((new ProductService()).getProducts());
 			return null;
 		}
 

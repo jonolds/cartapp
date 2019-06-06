@@ -27,8 +27,7 @@
         android:layout_below="@+id/text_view_product_lookup_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:autofillHints="" />
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:id="@+id/text_view_product_count"
@@ -45,8 +44,7 @@
         android:layout_below="@+id/text_view_product_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:autofillHints="" />
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:id="@+id/text_view_product_created_on"
@@ -64,8 +62,7 @@
         android:layout_below="@+id/text_view_product_created_on"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:autofillHints="" />
+        android:layout_marginTop="5dp"/>
 
     <ImageButton
         android:id="@+id/button_activity_edit_save"
