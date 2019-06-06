@@ -2,8 +2,9 @@ package edu.uark.cartapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import edu.uark.cartapp.models.transition.ProductTransition;
 

@@ -36,15 +36,15 @@ public class ProductService extends BaseRemoteService {
 	}
 
 	public List<Product> getProducts() {
-		List<Product> activities;
+		List<Product> productList;
 		JSONObject rawJsonObject = this.requestSingle((new PathElementInterface[]{ProductApiMethod.PRODUCT, ApiLevel.ONE, ProductApiMethod.PRODUCTS}));
 
 		if (rawJsonObject != null) {
-			activities = (new ProductListing()).loadFromJson(rawJsonObject).getProducts();
+			productList = (new ProductListing()).loadFromJson(rawJsonObject).getProductList();
 		} else {
-			activities = new ArrayList<>(0);
+			productList = new ArrayList<>(0);
 		}
-		return activities;
+		return productList;
 	}
 
 	public Product putProduct(Product product) {

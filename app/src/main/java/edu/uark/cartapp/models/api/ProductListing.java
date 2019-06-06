@@ -12,22 +12,22 @@ import edu.uark.cartapp.models.api.interfaces.LoadFromJsonInterface;
 
 /* ==== APP ProductListing.java ====*/
 public class ProductListing implements LoadFromJsonInterface<ProductListing> {
-	private List<Product> products;
+	private List<Product> productList;
 
 	public ProductListing() {
-		this.products = new LinkedList<>();
+		this.productList = new LinkedList<>();
 	}
 
-	public List<Product> getProducts() {
-		return this.products;
+	public List<Product> getProductList() {
+		return this.productList;
 	}
-	public ProductListing setProducts(List<Product> products) {
-		this.products = products;
+	public ProductListing setProductList(List<Product> productList) {
+		this.productList = productList;
 		return this;
 	}
 
 	public ProductListing addProduct(Product product) {
-		this.products.add(product);
+		this.productList.add(product);
 		return this;
 	}
 
@@ -39,7 +39,7 @@ public class ProductListing implements LoadFromJsonInterface<ProductListing> {
 			try {
 				for (int i = 0; i < jsonActivities.length(); i++) {
 					JSONObject jsonActivity = jsonActivities.getJSONObject(i);
-					this.products.add((new Product()).loadFromJson(jsonActivity));
+					this.productList.add((new Product()).loadFromJson(jsonActivity));
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
